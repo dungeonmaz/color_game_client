@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react'
 import { useMediaQuery } from '@mui/material'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ColorGame from './components/colors/ColorGame'
 import Navbar from './components/Navbar'
@@ -9,10 +9,6 @@ import Home from './components/home/Home'
 const App = () => {
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
-
-  useEffect(() => {
-    fetch("")
-  }, [])
 
   return (
     <div>

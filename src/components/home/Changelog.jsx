@@ -1,6 +1,7 @@
+import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { Component } from 'react'
-import  ChangelogCard from './ChangelogCard'
+import ChangelogCard from './ChangelogCard'
 
 export class Changelog extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export class Changelog extends Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            commits: result
+            commits: result.slice(0, -3)
           });
         },
         (error) => {
@@ -38,11 +39,14 @@ export class Changelog extends Component {
 
   render() {
     return (
-      <Stack p="1rem">
-        {this.state.isLoaded && this.state.commits.map(com => (
-          <ChangelogCard name={com.commit.message.split('\n')[0]} description={com.commit.message.split('\n')[1]} />
-        ))}
-      </Stack>
+      <div>
+        <Typography textAlign="center" variant="h5" p={1}>Changelogs</Typography>
+        <Stack p="1rem" sx={{ overflowY: 'scroll', height: '500px', '&::-webkit-scrollbar': { display: 'none' } }}>
+          {this.state.isLoaded && this.state.commits.map((com, index) => (
+            <ChangelogCard key={index} name={com.commit.message.split('\n')[0]} description={com.commit.message.split('\n')[1]} />
+          ))}
+        </Stack>
+      </div>
     )
   }
 }

@@ -6,6 +6,7 @@ const cardSx = {
     display: 'flex',
     p: '1rem',
     m: '1rem 0',
+    flexShrink: 0,
 }
 
 const ChangelogCard = ({ description, name }) => {

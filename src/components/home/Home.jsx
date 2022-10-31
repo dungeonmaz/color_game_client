@@ -5,7 +5,7 @@ import Games from './Games'
 
 const Home = () => {
     return (
-        <Paper elevation={3} sx={{ m: '2% 5%' }}>
+        <Paper elevation={3} sx={{ m: '2% 5% 80px 5%', borderRadius:'1rem' }}>
             <Grid container>
                 <Grid item xs={12} md={8}>
                     <Games />

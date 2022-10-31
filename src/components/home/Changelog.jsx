@@ -1,21 +1,50 @@
-import { Stack } from '@mui/system'
-import React, { useEffect, useState } from 'react'
-import ChangelogCard from './ChangelogCard'
+import { Stack } from '@mui/system';
+import React, { Component } from 'react'
+import  ChangelogCard from './ChangelogCard'
 
-const Changelog = () => {
-  const [commits, setCommits] = useState()
+export class Changelog extends Component {
+  constructor(props) {
+    super(props);
+    this.update = this.update.bind(this);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      commits: null,
+    };
+  }
 
-  useEffect(() => {
+  update() {
     fetch("https://api.github.com/repos/dungeonmaz/color_game_client/commits")
       .then(res => res.json())
-      .then(res => setCommits(res))
-  }, [])
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            commits: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
 
-  return (
-    <Stack p="1rem">
-      <ChangelogCard name={"0.1"} description={commits[0].commit.message} />
-    </Stack>
-  )
+  componentDidMount() {
+    this.update()
+  }
+
+  render() {
+    return (
+      <Stack p="1rem">
+        {this.state.isLoaded && this.state.commits.map(com => (
+          <ChangelogCard name={com.commit.message.split('\n')[0]} description={com.commit.message.split('\n')[1]} />
+        ))}
+      </Stack>
+    )
+  }
 }
 
 export default Changelog

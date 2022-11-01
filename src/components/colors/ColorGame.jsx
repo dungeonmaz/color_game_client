@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from '@mui/material'
 import React, { Component } from 'react'
 import { withTheme } from '@emotion/react'
-import { createSettings, getData } from '../../colors'
+import { createSettings, getData, saveSettings } from '../../colors'
 import ColorsContainer from './ColorsContainer'
 import ColorEndDialog from './ColorEndDialog'
 import ColorOptionsMenu from './ColorOptionsMenu'
@@ -49,9 +49,8 @@ export class ColorGame extends Component {
     }
 
     getSettings() {
-        const guessColorNameSettings = JSON.parse(localStorage.getItem('guessColorNameSettings'))
-        if (guessColorNameSettings) return guessColorNameSettings
-        return createSettings({count: 3, skips: 5})
+        if (createSettings() === 'error') saveSettings({count: 3, skips: 5})
+        return createSettings()
     }
 
     handleSettings() {
@@ -83,11 +82,12 @@ export class ColorGame extends Component {
     }
 
     createState() {
+        const settings = this.getSettings()
         return {
-            data: getData(this.getSettings().count),
+            data: getData(settings.count),
             score: 0,
-            scoreModifier: this.getSettings().scoreModifier,
-            skips: this.getSettings().skips,
+            scoreModifier: settings.scoreModifier,
+            skips: settings.skips,
             isLose: false,
             playerColor: null,
             isSettings: false,

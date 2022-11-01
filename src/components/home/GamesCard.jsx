@@ -24,7 +24,7 @@ const GamesCard = ({ img, description, name }) => {
                     </CardContent>
                 </Box>
                 <CardMedia component="img"
-                    sx={{ width: {xs:"100px", sm:'150px'}, ml:'auto'}}
+                    sx={{ width: {xs:"100px", sm:'150px'}, ml:'auto', my:'auto'}}
                     image={img}
                     alt="Color Game" />
             </Card>

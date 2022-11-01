@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Dialog, DialogContent, DialogTitle, Button, Slider, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { countScoreMod, createSettings } from '../../colors'
+import { clampSetting, countScoreMod, saveSettings } from '../../colors'
 
 const ColorOptionsMenu = ({ btnSx, restartGame, getSettings, handleSettings }) => {
     const [values, setValues] = useState({
@@ -10,7 +10,7 @@ const ColorOptionsMenu = ({ btnSx, restartGame, getSettings, handleSettings }) =
     })
 
     const handleChange = () => {
-        createSettings(values)
+        saveSettings(values)
         restartGame()
     }
 
@@ -21,12 +21,12 @@ const ColorOptionsMenu = ({ btnSx, restartGame, getSettings, handleSettings }) =
                 <Stack spacing={1}>
                     <Typography textAlign="center">Count</Typography>
                     <Stack direction="row" spacing={2}>
-                        <Slider value={values.count} min={2} max={9} onChange={(event) => setValues({ ...values, count: event.target.value })} />
+                        <Slider value={values.count} min={clampSetting.count.min} max={clampSetting.count.max} onChange={(event) => setValues({ ...values, count: event.target.value })} />
                         <Typography>{values.count}</Typography>
                     </Stack>
                     <Typography textAlign="center">Skips</Typography>
                     <Stack direction="row" spacing={2}>
-                        <Slider value={values.skips} min={0} max={10} onChange={(event) => setValues({ ...values, skips: event.target.value })} />
+                        <Slider value={values.skips} min={clampSetting.skips.min} max={clampSetting.skips.max} onChange={(event) => setValues({ ...values, skips: event.target.value })} />
                         <Typography>{values.skips}</Typography>
                     </Stack>
                     <Typography textAlign="center">Score Modifier: {countScoreMod(values.count, values.skips)}</Typography>

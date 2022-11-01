@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Box, Divider, Button, IconButton, Drawer, Grid, useTheme } from '@mui/material'
+import { AppBar, Toolbar, Typography, Box, Divider, Button, IconButton, Drawer, Grid, useTheme, Popover, Paper } from '@mui/material'
 import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,19 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const handleNavigate = (path) => navigate(path)
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const btnSx = {
         transition: 'transform 0.2s, background 0.3s',
@@ -36,9 +49,34 @@ const Navbar = () => {
                 </Button>
             </Grid>
             <Grid item xs={6} md={2}>
-                <Button  variant='contained' sx={btnSx} onClick={() => handleNavigate("/guess_color_name")}>
+                <Button variant='contained' sx={btnSx} onClick={handleClick}>
                     Play
                 </Button>
+                <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                >
+                    <Paper elevation={3}>
+                        <Grid container sx={{ p: 1, textAlign: 'center' }} spacing={1} >
+                            <Grid item xs={12}>
+                                <Button variant='contained' sx={btnSx} onClick={() => handleNavigate("/guess_color_name")}>
+                                    Guess Name
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button variant='contained' sx={btnSx} onClick={() => handleNavigate("/time_guess")}>
+                                    Time Guess
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Popover>
             </Grid>
             {/*<Grid item xs={6} md={2}>
                 <Button variant='contained' sx={btnSx} onClick={() => handleNavigate("/scores")}>
@@ -54,7 +92,7 @@ const Navbar = () => {
     )
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+        <Box sx={{ textAlign: 'center' }}>
             <Typography variant="h5" sx={{ my: 2 }}>
                 Color Game
             </Typography>

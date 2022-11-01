@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ColorGame from './components/colors/ColorGame'
 import Navbar from './components/Navbar'
 import Home from './components/home/Home'
+import TimeGuessGame from './components/time_guess/TimeGuessGame'
 
 const App = () => {
   const theme = useTheme()
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/guess_color_name' element={<ColorGame matches={matches} />} />
+          <Route path='/time_guess' element={<TimeGuessGame />} />
           <Route path='/scores' element={<div />} />
           <Route path='/profile' element={<div />} />
         </Routes>

@@ -1,9 +1,10 @@
 import { Button, Grid, Typography } from '@mui/material'
 import React, { Component } from 'react'
 import { withTheme } from '@emotion/react'
-import { createSettings, getData, saveSettings } from '../../colors'
-import ColorsContainer from './ColorsContainer'
-import ColorEndDialog from './ColorEndDialog'
+import { getData } from '../../../colors'
+import { createSettings, saveSettings } from './settings'
+import ColorsContainer from '../ColorsContainer'
+import ColorEndDialog from '../ColorEndDialog'
 import ColorOptionsMenu from './ColorOptionsMenu'
 
 

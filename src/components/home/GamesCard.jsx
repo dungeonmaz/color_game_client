@@ -13,10 +13,10 @@ const cardSx = {
     }
 }
 
-const GamesCard = ({ img, description, name }) => {
+const GamesCard = ({ img, description, name, nav }) => {
     const navigate = useNavigate()
     return (
-        <Card sx={cardSx} onClick={() => navigate('/guess_color_name')}>
+        <Card sx={cardSx} onClick={() => navigate(nav)}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent >
                         <Typography sx={{ typography: { xs: 'body1', sm: 'h5' } }}>{name}</Typography>

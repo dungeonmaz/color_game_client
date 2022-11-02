@@ -1,8 +1,10 @@
 import React from 'react'
 import { Dialog, DialogContent, DialogTitle, Typography, Paper, Button } from '@mui/material'
 import { Stack } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
 
 const ColorEndDialog = ({ score, playerColor, answerColor, btnSx, restartGame }) => {
+    const navigate = useNavigate()
     return (
         <Dialog open={true}>
             <DialogTitle sx={{ textAlign: 'center' }}>Game Over</DialogTitle>
@@ -24,6 +26,9 @@ const ColorEndDialog = ({ score, playerColor, answerColor, btnSx, restartGame })
                 </Stack>
                 <Button variant='contained' sx={btnSx} onClick={() => restartGame()} >
                     Restart
+                </Button>
+                <Button variant='contained' sx={btnSx} onClick={() => navigate('/')} >
+                    Exit
                 </Button>
             </DialogContent>
         </Dialog>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Dialog, DialogContent, DialogTitle, Button, Slider, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { clampSetting, countScoreMod, saveSettings } from '../../colors'
+import { clampSetting, countScoreMod, saveSettings } from './settings'
 
 const ColorOptionsMenu = ({ btnSx, restartGame, getSettings, handleSettings }) => {
     const [values, setValues] = useState({
